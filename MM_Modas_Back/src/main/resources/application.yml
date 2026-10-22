@@ -15,9 +15,9 @@ spring:
   #   setx DB_USER "neondb_owner"
   #   setx DB_PASSWORD "sua_senha"
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/mm_modas}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
+    url: ${DB_URL:jdbc:postgresql://ep-bitter-dew-b4nnfunx-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require}
+    username: ${DB_USER:neondb_owner}
+    password: ${DB_PASSWORD:npg_0FOCylLfMi1U}
     hikari:
       maximum-pool-size: 5          # Neon free tier tem conexoes limitadas
       minimum-idle: 1
