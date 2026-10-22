@@ -1,5 +1,6 @@
 package br.com.mmmodas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class ProdutoImagem {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;

@@ -20,7 +20,11 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
 
     Optional<Pedido> findByIdempotencyKey(String idempotencyKey);
 
-    Page<Pedido> findByClienteIdOrderByCriadoEmDesc(UUID clienteId, Pageable pageable);
+    @Query(
+            value = "select distinct p from Pedido p left join fetch p.itens i where p.cliente.id = :clienteId order by p.criadoEm desc",
+            countQuery = "select count(p) from Pedido p where p.cliente.id = :clienteId"
+    )
+    Page<Pedido> findByClienteIdOrderByCriadoEmDesc(@Param("clienteId") UUID clienteId, Pageable pageable);
 
     @Query("""
             select distinct p from Pedido p

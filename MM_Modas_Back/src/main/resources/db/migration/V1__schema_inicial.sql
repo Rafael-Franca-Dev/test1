@@ -208,7 +208,7 @@ CREATE TABLE cupons (
     ativo           BOOLEAN       NOT NULL DEFAULT TRUE,
     CONSTRAINT uq_cupons_codigo       UNIQUE (codigo),
     CONSTRAINT ck_cupons_tipo         CHECK (tipo IN ('PERCENTUAL','VALOR_FIXO','FRETE_GRATIS')),
-    CONSTRAINT ck_cupons_valor        CHECK (valor >= 0 AND valor_minimo >= 0),
+    CONSTRAINT ck_cupons_valor        CHECK (valor >= 0 AND valor_minimo >= 0 AND (tipo <> 'PERCENTUAL' OR valor <= 100)),
     CONSTRAINT ck_cupons_janela       CHECK (valido_ate IS NULL OR valido_ate > valido_de),
     CONSTRAINT ck_cupons_usos         CHECK (usos_maximos IS NULL OR usos_realizados <= usos_maximos)
 );

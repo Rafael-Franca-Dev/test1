@@ -19,6 +19,13 @@ public interface VariacaoRepository extends JpaRepository<Variacao, UUID> {
 
     List<Variacao> findByProdutoIdOrderByTamanhoAscCorAsc(UUID produtoId);
 
+    @Query("""
+            select v from Variacao v
+             where v.produto.id in :produtoIds and v.ativo = true
+             order by v.criadoEm asc
+            """)
+    List<Variacao> buscarAtivasPorProdutos(@Param("produtoIds") List<UUID> produtoIds);
+
     /**
      * Carrega a variacao com produto e imagens em uma consulta. Usado no checkout,
      * onde precisamos do nome do produto e do preco sem disparar N+1 por item.

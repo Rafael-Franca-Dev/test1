@@ -1,5 +1,6 @@
 package br.com.mmmodas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class PedidoItem {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;

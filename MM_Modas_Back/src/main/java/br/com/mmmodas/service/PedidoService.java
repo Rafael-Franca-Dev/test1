@@ -72,6 +72,10 @@ public class PedidoService {
 
         Cliente cliente = clienteRepository.findById(clienteId)
                 .orElseThrow(() -> RecursoNaoEncontradoException.de("Cliente", clienteId));
+        if (!cliente.isAtivo()) {
+            throw new RegraDeNegocioException("CLIENTE_INATIVO",
+                    "Esta conta de cliente esta desativada.");
+        }
 
         Endereco endereco = enderecoRepository.findByIdAndClienteId(req.enderecoId(), clienteId)
                 .orElseThrow(() -> new RegraDeNegocioException("ENDERECO_INVALIDO",
@@ -204,6 +208,13 @@ public class PedidoService {
                     "Pedido no status " + pedido.getStatus() + " nao pode ser cancelado.");
         }
 
+        // Captura os dados antes do marcarComoCancelado (que limpa o contexto JPA via clearAutomatically=true)
+        String numeroPedido = pedido.getNumero();
+        UUID cupomId = pedido.getCupom() != null ? pedido.getCupom().getId() : null;
+        List<EstoqueService.ItemEstorno> itensEstorno = pedido.getItens().stream()
+                .map(i -> new EstoqueService.ItemEstorno(i.getVariacao().getId(), i.getQuantidade()))
+                .toList();
+
         int linhas = pedidoRepository.marcarComoCancelado(pedidoId, OffsetDateTime.now());
         if (linhas == 0) {
             // Outra requisicao cancelou entre a leitura e o update.
@@ -213,17 +224,14 @@ public class PedidoService {
 
         // Devolve ao estoque apenas se a saida realmente aconteceu.
         if (pedidoRepository.estoqueJaFoiBaixado(pedidoId)) {
-            List<EstoqueService.ItemEstorno> itens = pedido.getItens().stream()
-                    .map(i -> new EstoqueService.ItemEstorno(i.getVariacao().getId(), i.getQuantidade()))
-                    .toList();
-            estoqueService.estornarPedido(pedidoId, itens);
+            estoqueService.estornarPedido(pedidoId, itensEstorno);
         }
 
-        if (pedido.getCupom() != null) {
-            cupomRepository.devolver(pedido.getCupom().getId());
+        if (cupomId != null) {
+            cupomRepository.devolver(cupomId);
         }
 
-        log.info("Pedido {} cancelado. Motivo: {}", pedido.getNumero(), motivo);
+        log.info("Pedido {} cancelado. Motivo: {}", numeroPedido, motivo);
     }
 
     @Transactional(readOnly = true)
@@ -239,8 +247,8 @@ public class PedidoService {
     }
 
     @Transactional(readOnly = true)
-    public List<Pedido> listarDoCliente(UUID clienteId, org.springframework.data.domain.Pageable pageable) {
-        return pedidoRepository.findByClienteIdOrderByCriadoEmDesc(clienteId, pageable).getContent();
+    public org.springframework.data.domain.Page<Pedido> listarDoCliente(UUID clienteId, org.springframework.data.domain.Pageable pageable) {
+        return pedidoRepository.findByClienteIdOrderByCriadoEmDesc(clienteId, pageable);
     }
 
     private void converterCarrinhoDoCliente(UUID clienteId) {

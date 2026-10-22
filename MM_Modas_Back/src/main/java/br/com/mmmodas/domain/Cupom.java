@@ -69,6 +69,9 @@ public class Cupom {
         if (usosMaximos != null && usosRealizados >= usosMaximos) {
             return false;
         }
+        if (tipo == TipoCupom.PERCENTUAL && valor.compareTo(BigDecimal.valueOf(100)) > 0) {
+            return false;
+        }
         return subtotal.compareTo(valorMinimo) >= 0;
     }
 
@@ -77,8 +80,9 @@ public class Cupom {
      * cupom de R$ 100 num carrinho de R$ 30 nao pode virar credito de R$ 70.
      */
     public BigDecimal calcularDesconto(BigDecimal subtotal) {
+        BigDecimal percentualSeguro = valor.min(BigDecimal.valueOf(100)).max(BigDecimal.ZERO);
         BigDecimal desconto = switch (tipo) {
-            case PERCENTUAL -> subtotal.multiply(valor).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+            case PERCENTUAL -> subtotal.multiply(percentualSeguro).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
             case VALOR_FIXO -> valor;
             case FRETE_GRATIS -> BigDecimal.ZERO;
         };

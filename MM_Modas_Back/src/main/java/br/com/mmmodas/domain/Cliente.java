@@ -1,6 +1,7 @@
 package br.com.mmmodas.domain;
 
 import br.com.mmmodas.domain.enums.PerfilUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Cliente {
     private String email;
 
     /** Hash bcrypt/argon2. Senha em claro nunca chega aqui. */
+    @JsonIgnore
     @Column(name = "senha_hash", nullable = false)
     private String senhaHash;
 
