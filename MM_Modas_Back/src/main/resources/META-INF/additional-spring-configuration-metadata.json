@@ -1,0 +1,66 @@
+{
+  "groups": [
+    {
+      "name": "app.jwt",
+      "type": "br.com.mmmodas.config.JwtProperties",
+      "sourceType": "br.com.mmmodas.config.JwtProperties"
+    },
+    {
+      "name": "app.cors",
+      "type": "br.com.mmmodas.config.CorsProperties",
+      "sourceType": "br.com.mmmodas.config.CorsProperties"
+    },
+    {
+      "name": "app.mercadopago",
+      "type": "br.com.mmmodas.config.MercadoPagoProperties",
+      "sourceType": "br.com.mmmodas.config.MercadoPagoProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.jwt.secret",
+      "type": "java.lang.String",
+      "sourceType": "br.com.mmmodas.config.JwtProperties",
+      "description": "Segredo HMAC-SHA256 (minimo 32 bytes) para assinatura de tokens JWT."
+    },
+    {
+      "name": "app.jwt.access-token-minutos",
+      "type": "java.lang.Long",
+      "sourceType": "br.com.mmmodas.config.JwtProperties",
+      "defaultValue": 30,
+      "description": "Tempo de vida do access token em minutos."
+    },
+    {
+      "name": "app.jwt.refresh-token-dias",
+      "type": "java.lang.Long",
+      "sourceType": "br.com.mmmodas.config.JwtProperties",
+      "defaultValue": 7,
+      "description": "Tempo de vida do refresh token em dias."
+    },
+    {
+      "name": "app.cors.allowed-origins",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "br.com.mmmodas.config.CorsProperties",
+      "description": "Lista de origens permitidas para requisicoes CORS."
+    },
+    {
+      "name": "app.mercadopago.access-token",
+      "type": "java.lang.String",
+      "sourceType": "br.com.mmmodas.config.MercadoPagoProperties",
+      "description": "Token de acesso da API do Mercado Pago."
+    },
+    {
+      "name": "app.mercadopago.webhook-secret",
+      "type": "java.lang.String",
+      "sourceType": "br.com.mmmodas.config.MercadoPagoProperties",
+      "description": "Segredo de validacao de assinatura do webhook do Mercado Pago."
+    },
+    {
+      "name": "app.mercadopago.notification-url",
+      "type": "java.lang.String",
+      "sourceType": "br.com.mmmodas.config.MercadoPagoProperties",
+      "description": "URL publica para notificacoes de pagamento do Mercado Pago."
+    }
+  ]
+}
+

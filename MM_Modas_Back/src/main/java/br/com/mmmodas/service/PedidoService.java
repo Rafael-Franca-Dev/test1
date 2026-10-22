@@ -3,7 +3,6 @@ package br.com.mmmodas.service;
 import br.com.mmmodas.domain.*;
 import br.com.mmmodas.domain.enums.StatusCarrinho;
 import br.com.mmmodas.domain.enums.StatusPedido;
-import br.com.mmmodas.domain.enums.TipoMovimentacao;
 import br.com.mmmodas.exception.RecursoNaoEncontradoException;
 import br.com.mmmodas.exception.RegraDeNegocioException;
 import br.com.mmmodas.repository.*;
@@ -57,6 +56,7 @@ public class PedidoService {
     private final FreteService freteService;
 
     @Transactional
+    @SuppressWarnings("null")
     public Pedido criar(UUID clienteId, PedidoRequest req) {
         String chave = normalizarChave(req.idempotencyKey());
 
@@ -85,7 +85,7 @@ public class PedidoService {
         // estetica: e o que impede deadlock entre checkouts simultaneos.
         NavigableMap<UUID, Integer> quantidades = new TreeMap<>();
         for (ItemPedidoRequest item : req.itens()) {
-            quantidades.merge(item.variacaoId(), item.quantidade(), Integer::sum);
+            quantidades.merge(item.variacaoId(), item.quantidade(), (a, b) -> a + b);
         }
 
         List<UUID> ids = new ArrayList<>(quantidades.keySet());

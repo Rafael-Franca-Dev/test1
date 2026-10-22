@@ -39,6 +39,7 @@ public class EnderecoService {
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public EnderecoResponse criar(UUID clienteId, EnderecoRequest req) {
         Cliente cliente = clienteRepository.findById(clienteId)
                 .orElseThrow(() -> RecursoNaoEncontradoException.de("Cliente", clienteId));

@@ -11,6 +11,8 @@ import java.util.UUID;
  */
 public class EstoqueInsuficienteException extends RegraDeNegocioException {
 
+    private static final long serialVersionUID = 1L;
+
     private final UUID variacaoId;
     private final int solicitado;
     private final int disponivel;

@@ -1,6 +1,5 @@
 package br.com.mmmodas.service;
 
-import br.com.mmmodas.domain.Estoque;
 import br.com.mmmodas.domain.Produto;
 import br.com.mmmodas.domain.Variacao;
 import br.com.mmmodas.exception.RecursoNaoEncontradoException;
@@ -36,19 +35,20 @@ public class CatalogoService {
     }
 
     @Transactional(readOnly = true)
+    @SuppressWarnings("null")
     public List<ProdutoResponse> listarProdutos() {
         List<Produto> produtos = produtoRepository.listarAtivosComCategoriaEImagens();
         if (produtos.isEmpty()) {
             return List.of();
         }
 
-        List<UUID> produtoIds = produtos.stream().map(Produto::getId).toList();
+        List<UUID> produtoIds = produtos.stream().map(p -> p.getId()).toList();
         List<Variacao> variacoes = variacaoRepository.buscarAtivasPorProdutos(produtoIds);
 
-        List<UUID> variacaoIds = variacoes.stream().map(Variacao::getId).toList();
+        List<UUID> variacaoIds = variacoes.stream().map(v -> v.getId()).toList();
         Map<UUID, Integer> saldoPorVariacao = estoqueRepository.findAllById(variacaoIds)
                 .stream()
-                .collect(Collectors.toMap(Estoque::getVariacaoId, Estoque::disponivel));
+                .collect(Collectors.toMap(e -> e.getVariacaoId(), e -> e.disponivel()));
 
         Map<UUID, List<VariacaoResponse>> variacoesPorProduto = new HashMap<>();
         for (Variacao v : variacoes) {
@@ -64,15 +64,16 @@ public class CatalogoService {
     }
 
     @Transactional(readOnly = true)
+    @SuppressWarnings("null")
     public ProdutoResponse buscarPorSlug(String slug) {
         Produto produto = produtoRepository.buscarAtivoPorSlugComDetalhes(slug)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Produto nao encontrado: " + slug));
 
         List<Variacao> variacoes = variacaoRepository.buscarAtivasPorProdutos(List.of(produto.getId()));
-        List<UUID> variacaoIds = variacoes.stream().map(Variacao::getId).toList();
+        List<UUID> variacaoIds = variacoes.stream().map(v -> v.getId()).toList();
         Map<UUID, Integer> saldoPorVariacao = estoqueRepository.findAllById(variacaoIds)
                 .stream()
-                .collect(Collectors.toMap(Estoque::getVariacaoId, Estoque::disponivel));
+                .collect(Collectors.toMap(e -> e.getVariacaoId(), e -> e.disponivel()));
 
         List<VariacaoResponse> variacoesResp = variacoes.stream()
                 .map(v -> VariacaoResponse.de(v, saldoPorVariacao.getOrDefault(v.getId(), 0)))

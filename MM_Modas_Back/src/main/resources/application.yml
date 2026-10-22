@@ -33,10 +33,10 @@ spring:
     properties:
       hibernate:
         jdbc:
-          time_zone: UTC
-          batch_size: 30
-        order_inserts: true
-        order_updates: true
+          "[time_zone]": UTC
+          "[batch_size]": 30
+        "[order_inserts]": true
+        "[order_updates]": true
 
   flyway:
     enabled: true
@@ -75,5 +75,5 @@ app:
 
 logging:
   level:
-    br.com.mmmodas: DEBUG
-    org.hibernate.SQL: DEBUG
+    "[br.com.mmmodas]": DEBUG
+    "[org.hibernate.SQL]": DEBUG

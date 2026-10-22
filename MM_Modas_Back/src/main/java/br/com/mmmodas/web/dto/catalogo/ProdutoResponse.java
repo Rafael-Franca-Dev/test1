@@ -4,7 +4,6 @@ import br.com.mmmodas.domain.Produto;
 import br.com.mmmodas.domain.ProdutoImagem;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,12 +26,14 @@ public record ProdutoResponse(
 ) {
     public static ProdutoResponse de(Produto p, List<VariacaoResponse> variacoes) {
         List<ProdutoImagem> imgsOrdenadas = p.getImagens().stream()
-                .sorted(Comparator.comparing(ProdutoImagem::isPrincipal).reversed()
-                        .thenComparing(ProdutoImagem::getOrdem))
+                .sorted((a, b) -> {
+                    int cmp = Boolean.compare(b.isPrincipal(), a.isPrincipal());
+                    return cmp != 0 ? cmp : Integer.compare(a.getOrdem(), b.getOrdem());
+                })
                 .toList();
 
         String imgPrincipal = imgsOrdenadas.isEmpty() ? null : imgsOrdenadas.get(0).getUrl();
-        List<String> urls = imgsOrdenadas.stream().map(ProdutoImagem::getUrl).toList();
+        List<String> urls = imgsOrdenadas.stream().map(img -> img.getUrl()).toList();
         BigDecimal precoEfetivo = p.getPrecoPromocional() != null ? p.getPrecoPromocional() : p.getPrecoBase();
 
         return new ProdutoResponse(

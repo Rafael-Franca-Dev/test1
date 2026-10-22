@@ -75,6 +75,7 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
+    @SuppressWarnings("null")
     public AuthResponse refresh(RefreshRequest req) {
         try {
             Claims claims = jwtService.validarRefreshToken(req.refreshToken());
@@ -92,6 +93,7 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
+    @SuppressWarnings("null")
     public UsuarioResponse buscarUsuarioAtual(UUID clienteId) {
         Cliente cliente = clienteRepository.findById(clienteId)
                 .orElseThrow(() -> RecursoNaoEncontradoException.de("Cliente", clienteId));

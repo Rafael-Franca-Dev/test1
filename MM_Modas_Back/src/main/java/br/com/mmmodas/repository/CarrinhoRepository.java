@@ -5,12 +5,10 @@ import br.com.mmmodas.domain.enums.StatusCarrinho;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
 public interface CarrinhoRepository extends JpaRepository<Carrinho, UUID> {
 
     Optional<Carrinho> findFirstByClienteIdAndStatusOrderByCriadoEmDesc(UUID clienteId, StatusCarrinho status);

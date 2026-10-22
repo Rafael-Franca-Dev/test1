@@ -32,6 +32,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class EstoqueService {
 
     private final EstoqueRepository estoqueRepository;
@@ -54,7 +55,7 @@ public class EstoqueService {
             // Nao havia saldo. Lemos o disponivel real apenas para compor a
             // mensagem de erro - a decisao ja foi tomada pelo banco.
             int disponivel = estoqueRepository.findById(variacaoId)
-                    .map(Estoque::disponivel)
+                    .map(e -> e.disponivel())
                     .orElse(0);
             throw new EstoqueInsuficienteException(variacaoId, quantidade, disponivel);
         }
@@ -126,7 +127,7 @@ public class EstoqueService {
 
     @Transactional(readOnly = true)
     public int disponivel(UUID variacaoId) {
-        return estoqueRepository.findById(variacaoId).map(Estoque::disponivel).orElse(0);
+        return estoqueRepository.findById(variacaoId).map(e -> e.disponivel()).orElse(0);
     }
 
     @Transactional(readOnly = true)
