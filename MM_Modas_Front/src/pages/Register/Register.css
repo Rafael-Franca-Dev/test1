@@ -1,0 +1,269 @@
+/* =========================================================
+   Cadastro / Login (/cadastro) e "Minha conta"
+   ========================================================= */
+
+.auth-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.auth-tabs .chip {
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--roxo-900);
+  background: var(--surface);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.auth-tabs .chip:hover {
+  background: var(--roxo-100);
+}
+
+.auth-tabs .chip--active {
+  background: var(--laranja-300);
+  font-weight: 700;
+  transform: rotate(-1.5deg);
+}
+
+/* Layout: formulário à esquerda, lateral de vantagens à direita */
+.register {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.register__notice {
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+  background: var(--laranja-200);
+  border: 2px solid var(--roxo-900);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+}
+
+.register__form {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 2.5px solid var(--roxo-900);
+  border-radius: var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--roxo-300);
+}
+
+.register__form h2 {
+  font-size: 22px;
+  margin: var(--space-6) 0 var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 2px dashed var(--line);
+}
+
+.register__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.register__row--cep {
+  grid-template-columns: 2fr 1fr;
+}
+
+.register__row--city {
+  grid-template-columns: 3fr 1fr;
+}
+
+/* ---------- Seletor Jogador / Equipe ---------- */
+.register__types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.type-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4) var(--space-5);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.type-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.type-option strong {
+  font-family: var(--font-display);
+  font-size: 19px;
+}
+
+.type-option span {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.type-option--active {
+  border-color: var(--roxo-900);
+  background: var(--laranja-200);
+  box-shadow: 4px 4px 0 var(--roxo-900);
+}
+
+.type-option:focus-within {
+  outline: 3px solid var(--roxo-500);
+  outline-offset: 2px;
+}
+
+.register__staff {
+  margin-top: var(--space-2);
+}
+
+.field-hint {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.register__terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: var(--space-4);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.register__terms input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--roxo-600);
+}
+
+.register__submit {
+  margin-top: var(--space-5);
+}
+
+/* ---------- Lateral ---------- */
+.register__side {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-6) var(--space-5);
+  background: var(--roxo-100);
+  border-radius: var(--radius-lg);
+}
+
+.register__side h2 {
+  font-size: 22px;
+  margin: var(--space-4) 0 var(--space-3);
+}
+
+.register__side ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  text-align: left;
+}
+
+.register__side li::before {
+  content: '✦';
+  color: var(--laranja-700);
+  margin-right: 8px;
+}
+
+/* ---------- Minha conta ---------- */
+.account {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.account__card {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 2.5px solid var(--roxo-900);
+  border-radius: var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--laranja-300);
+}
+
+.account__card h2 {
+  font-size: 22px;
+}
+
+.account__data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.account__data dt {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--roxo-600);
+}
+
+.account__data dd {
+  margin: 2px 0 0;
+}
+
+.account__full {
+  grid-column: 1 / -1;
+}
+
+.account__actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (max-width: 960px) {
+  .register,
+  .account {
+    grid-template-columns: 1fr;
+  }
+  .register__side {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .register__form,
+  .account__card {
+    padding: var(--space-5) var(--space-4);
+  }
+  .register__row,
+  .register__types,
+  .account__data {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .register__types {
+    gap: var(--space-3);
+  }
+  .account__data {
+    gap: var(--space-3);
+  }
+  .register__row--city {
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-3);
+  }
+}

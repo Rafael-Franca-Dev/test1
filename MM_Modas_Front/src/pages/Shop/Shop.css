@@ -1,0 +1,111 @@
+/* =========================================================
+   Loja (/loja) — filtros e grade de produtos
+   ========================================================= */
+
+/* Linha de categorias (quebra para a linha de baixo se faltar espaço) */
+.shop__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.chip {
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--roxo-900);
+  background: var(--surface);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.chip:hover {
+  background: var(--roxo-100);
+}
+
+/* Categoria selecionada: laranja e levemente girada */
+.chip--active {
+  background: var(--laranja-300);
+  font-weight: 700;
+  transform: rotate(-2deg);
+}
+
+/* Barra de ferramentas (busca, promoções, ordenar) */
+.shop__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+/* Campo de busca em formato de pílula com a lupa dentro */
+.shop__search {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 14px;
+  background: var(--roxo-50);
+  border-radius: var(--radius-pill);
+  color: var(--ink-soft);
+}
+
+.shop__search input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: var(--ink);
+}
+
+.shop__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.shop__check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--roxo-600);
+}
+
+.shop__sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.shop__sort select {
+  padding: 8px 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+/* Estado vazio: nenhum produto com esses filtros */
+.shop__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  background: var(--roxo-50);
+  border: 2px dashed var(--roxo-300);
+  border-radius: var(--radius-lg);
+}
+
+.shop__empty h2 {
+  margin-top: var(--space-4);
+}

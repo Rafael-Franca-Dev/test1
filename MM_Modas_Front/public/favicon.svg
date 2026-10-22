@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="58" fill="#ffc596"/>
+  <g transform="translate(6 4) scale(0.9)">
+    <g fill="#c8b3f0" stroke="#2c1f4a" stroke-width="4">
+      <circle cx="28" cy="54" r="14"/><circle cx="33" cy="34" r="15"/><circle cx="50" cy="21" r="16"/>
+      <circle cx="70" cy="21" r="16"/><circle cx="87" cy="34" r="15"/><circle cx="92" cy="54" r="14"/>
+    </g>
+    <circle cx="60" cy="38" r="26" fill="#c8b3f0"/>
+    <g fill="#ffefe0" stroke="#2c1f4a" stroke-width="4">
+      <ellipse cx="25" cy="72" rx="7" ry="9"/><ellipse cx="95" cy="72" rx="7" ry="9"/>
+    </g>
+    <ellipse cx="60" cy="72" rx="35" ry="34" fill="#ffefe0" stroke="#2c1f4a" stroke-width="4"/>
+    <g fill="#c8b3f0" stroke="#2c1f4a" stroke-width="4">
+      <circle cx="42" cy="42" r="10"/><circle cx="60" cy="38" r="11"/><circle cx="78" cy="42" r="10"/>
+    </g>
+    <g stroke="#2c1f4a" stroke-width="5" stroke-linecap="round">
+      <path d="M37 56 L53 62"/><path d="M83 56 L67 62"/>
+    </g>
+    <circle cx="47" cy="68" r="6.5" fill="#fff" stroke="#2c1f4a" stroke-width="3"/>
+    <circle cx="73" cy="68" r="6.5" fill="#fff" stroke="#2c1f4a" stroke-width="3"/>
+    <circle cx="48.5" cy="68.5" r="2.8" fill="#2c1f4a"/><circle cx="71.5" cy="68.5" r="2.8" fill="#2c1f4a"/>
+    <path d="M36 86 Q60 93 84 86 Q79 106 60 106 Q41 106 36 86 Z" fill="#fff" stroke="#2c1f4a" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M39 94 Q60 99 81 94" fill="none" stroke="#2c1f4a" stroke-width="2.2"/>
+  </g>
+</svg>

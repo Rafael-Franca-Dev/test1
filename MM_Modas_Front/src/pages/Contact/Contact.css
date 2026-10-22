@@ -1,0 +1,164 @@
+/* =========================================================
+   Contato (/contato) — formulário, canais e FAQ
+   ========================================================= */
+
+/* Formulário (maior) + lateral */
+.contact {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Cartão do formulário com sombra dura laranja */
+.contact__card {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 2.5px solid var(--roxo-900);
+  border-radius: var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--laranja-300);
+}
+
+/* Nome e e-mail lado a lado */
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+textarea.input {
+  resize: vertical; /* só deixa aumentar a altura */
+}
+
+/* Tela de "mensagem enviada" */
+.contact__sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-5) 0;
+}
+
+.contact__sent h2 {
+  margin-top: var(--space-4);
+}
+
+/* ---------- Lateral ---------- */
+.contact__side {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.contact__side h2 {
+  font-size: 22px;
+}
+
+.contact__channels {
+  padding: var(--space-5);
+  background: var(--roxo-100);
+  border-radius: var(--radius-lg);
+}
+
+/* Botões de canal (WhatsApp / Instagram) */
+.channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-2);
+  background: var(--surface);
+  border: 2px solid var(--roxo-900);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.15s ease;
+}
+
+.channel:hover {
+  transform: translateX(4px);
+}
+
+.channel svg {
+  color: var(--roxo-600);
+}
+
+.channel span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.channel small {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+/* ---------- FAQ ---------- */
+
+/* scroll-margin-top: ao rolar até a âncora, não fica escondido atrás do header fixo */
+.faq,
+.faq__item {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+.faq__item {
+  border-bottom: 2px dashed var(--line);
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: background 0.3s ease;
+}
+
+/* Pergunta aberta pelo link do rodapé fica destacada */
+.faq__item--target {
+  background: var(--laranja-100);
+  box-shadow: inset 0 0 0 2px var(--laranja-300);
+}
+
+/* <summary> é o título clicável do <details> */
+.faq__item summary {
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none; /* remove a setinha padrão */
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none; /* remove a setinha padrão no Safari */
+}
+
+/* "+" que gira e vira "×" quando a pergunta está aberta */
+.faq__item summary::after {
+  content: '+';
+  font-size: 20px;
+  line-height: 1;
+  color: var(--roxo-600);
+  transition: transform 0.2s ease;
+}
+
+.faq__item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq__item p {
+  margin: var(--space-2) 0 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact__card {
+    padding: var(--space-5) var(--space-4);
+  }
+  .contact__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

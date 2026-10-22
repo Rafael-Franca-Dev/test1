@@ -1,0 +1,177 @@
+/* =========================================================
+   Nossa história (/sobre)
+   ========================================================= */
+
+/* ---------- Abertura: texto + retrato do mascote ---------- */
+.about__hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-5);
+}
+
+.about__hero h1 {
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 800;
+}
+
+/* "Menino Mau" em roxo com marca-texto laranja (gradiente com cortes secos) */
+.about__accent {
+  color: var(--roxo-600);
+  background: linear-gradient(transparent 62%, var(--laranja-300) 62%, var(--laranja-300) 90%, transparent 90%);
+}
+
+.about__lead {
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 540px;
+}
+
+/* Moldura em arco com o mascote, levemente girada */
+.about__portrait {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-6);
+  background: var(--laranja-200);
+  border: 2.5px solid var(--roxo-900);
+  border-radius: 50% 50% var(--radius-lg) var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--roxo-300);
+  transform: rotate(2deg);
+}
+
+.about__caption {
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--roxo-700);
+}
+
+/* ---------- Como tudo começou: 3 pilares ligados por linha tracejada ---------- */
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  position: relative;
+}
+
+/* Linha tracejada que liga os números */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  right: 22px;
+  border-top: 2.5px dashed var(--roxo-300);
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__dot {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background: var(--laranja-300);
+  border: 2.5px solid var(--roxo-900);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  position: relative;
+}
+
+.timeline__item h3 {
+  font-size: 22px;
+  margin-bottom: var(--space-2);
+}
+
+.timeline__item p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  margin: 0;
+}
+
+/* ---------- Valores: cards alternando inclinação ---------- */
+
+.values {
+  padding: var(--space-8) 0;
+  background: var(--roxo-100);
+  border-top: 2px solid var(--roxo-200);
+  border-bottom: 2px solid var(--roxo-200);
+}
+
+.values__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.value {
+  padding: var(--space-6) var(--space-5);
+  background: var(--surface);
+  border: 2px solid var(--roxo-900);
+  border-radius: var(--radius-md);
+}
+
+.value:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.value:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.value h3 {
+  font-size: 24px;
+  color: var(--roxo-700);
+}
+
+.value p {
+  margin: 0;
+}
+
+/* ---------- Chamada final ---------- */
+.about__cta {
+  text-align: center;
+  padding-top: var(--space-8);
+}
+
+.about__cta h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin-bottom: var(--space-5);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .about__hero {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+  .timeline::before {
+    display: none;
+  }
+  .values__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,57 @@
+/* =========================================================
+   Logo da MM MODAS
+   ========================================================= */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+
+/* Círculo laranja com contorno onde fica o mascote */
+.logo__badge {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--laranja-300);
+  border: 2.5px solid var(--roxo-900);
+  padding: 2px;
+  transition: transform 0.25s ease;
+}
+
+/* Mascote "se mexe" quando o mouse passa no logo */
+.logo:hover .logo__badge {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+}
+
+/* "MM" grande */
+.logo__mm {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+}
+
+/* "MODAS" pequeno e espaçado */
+.logo__modas {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  color: var(--roxo-600);
+}
+
+/* Versão clara (usada no rodapé escuro) */
+.logo--light {
+  color: #fff;
+}
+
+.logo--light .logo__modas {
+  color: var(--laranja-300);
+}

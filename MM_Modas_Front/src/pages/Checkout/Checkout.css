@@ -1,0 +1,132 @@
+/* =========================================================
+   Checkout (/checkout)
+   ========================================================= */
+
+/* Formulário + resumo do pedido */
+.checkout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.checkout__form {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.checkout__form h2 {
+  font-size: 22px;
+  margin-top: var(--space-5);
+}
+
+.checkout__form h2:first-child {
+  margin-top: 0;
+}
+
+/* CEP e número lado a lado */
+.checkout__row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Cards de pagamento (Pix / Cartão / Boleto) */
+.pay-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.pay-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+/* Radio escondido: o card inteiro é clicável */
+.pay-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pay-option span {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.pay-option--active {
+  border-color: var(--roxo-900);
+  background: var(--roxo-100);
+  box-shadow: 3px 3px 0 var(--roxo-300);
+}
+
+.pay-option:focus-within {
+  outline: 3px solid var(--roxo-500);
+  outline-offset: 2px;
+}
+
+/* Lista de itens no resumo */
+.checkout__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: grid;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.checkout__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.checkout__total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+  border-top: 2px dashed var(--line);
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+/* Tela de pedido confirmado */
+.order-ok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+
+.order-ok .eyebrow {
+  margin-top: var(--space-5);
+}
+
+.order-ok h1 {
+  font-size: clamp(34px, 5vw, 56px);
+}
+
+@media (max-width: 960px) {
+  .checkout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .checkout__form {
+    padding: var(--space-5) var(--space-4);
+  }
+  .pay-options {
+    grid-template-columns: 1fr;
+  }
+}

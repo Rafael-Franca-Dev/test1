@@ -1,0 +1,112 @@
+/* =========================================================
+   Grade de produtos + card de produto
+   ========================================================= */
+
+/* Grade responsiva: quantas colunas de 240px couberem */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.product-card {
+  background: var(--surface);
+  border: 2px solid var(--roxo-900);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover: o card "sobe" e ganha sombra lilás */
+.product-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--roxo-300);
+}
+
+/* ...e a peça gira um pouquinho */
+.product-card:hover .product-art__svg {
+  transform: rotate(-4deg) scale(1.05);
+}
+
+.product-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card__media {
+  position: relative;
+  border-bottom: 2px solid var(--roxo-900);
+}
+
+/* Etiquetas (Novo / -%) no canto da imagem */
+.product-card__tags {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.product-card__body {
+  padding: var(--space-4);
+}
+
+.product-card__name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.product-card__prices {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.product-card__price {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--roxo-700);
+}
+
+.product-card__old {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.product-card__colors {
+  display: flex;
+  gap: 6px;
+}
+
+/* Bolinhas das cores disponíveis */
+.swatch-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--roxo-900);
+}
+
+/* Celular: sempre 2 colunas, textos menores */
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .product-card__body {
+    padding: var(--space-3);
+  }
+  .product-card__name {
+    font-size: 15px;
+  }
+  .product-card__prices {
+    flex-wrap: wrap;
+    gap: 0 var(--space-2);
+  }
+  .product-card__price {
+    font-size: 15px;
+  }
+}

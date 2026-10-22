@@ -1,0 +1,256 @@
+/* =========================================================
+   Página do produto (/produto/:slug)
+   ========================================================= */
+
+/* Botão "Voltar" (pílula do site, versão compacta) */
+.btn--back {
+  margin-top: var(--space-5);
+  padding: 8px 18px;
+  font-size: 14px;
+  background: var(--surface);
+}
+
+.btn--back:hover {
+  background: var(--laranja-100);
+}
+
+/* Trilha "Início / Loja / ..." */
+.breadcrumb {
+  padding: var(--space-4) 0 var(--space-5);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--roxo-600);
+  text-decoration: underline;
+}
+
+.breadcrumb [aria-current] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Layout: galeria à esquerda, informações à direita */
+.pdp {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+/* ---------- Galeria ---------- */
+
+/* A galeria acompanha a rolagem (sticky) no desktop */
+.pdp__gallery {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+}
+
+.pdp__art {
+  border: 2.5px solid var(--roxo-900);
+  border-radius: var(--radius-lg);
+  box-shadow: 8px 8px 0 var(--laranja-300);
+}
+
+.pdp__thumbs {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.pdp__thumb {
+  width: 84px;
+  padding: 0;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+}
+
+.pdp__thumb--active {
+  border-color: var(--roxo-900);
+  box-shadow: 3px 3px 0 var(--roxo-300);
+}
+
+/* ---------- Informações ---------- */
+
+.pdp__tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: var(--space-3);
+  min-height: 26px;
+}
+
+.pdp__name {
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 800;
+}
+
+.pdp__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.pdp__price strong {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--roxo-700);
+}
+
+.pdp__price s {
+  color: var(--ink-soft);
+}
+
+.pdp__installments {
+  font-size: 14px;
+}
+
+.pdp__desc {
+  font-size: 17px;
+  padding: var(--space-4) 0;
+  border-top: 2px dashed var(--line);
+  border-bottom: 2px dashed var(--line);
+}
+
+.pdp__group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+}
+
+.pdp__group legend {
+  font-size: 15px;
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+.pdp__swatches,
+.pdp__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Bolinhas de cor clicáveis */
+.swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--roxo-900);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.swatch--active {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--roxo-600);
+  transform: scale(1.05);
+}
+
+/* Botões de tamanho */
+.size {
+  min-width: 54px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--roxo-900);
+  background: var(--surface);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.size:hover {
+  background: var(--roxo-100);
+}
+
+.size--active {
+  background: var(--roxo-600);
+  color: #fff;
+}
+
+.pdp__buy {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+}
+
+.pdp__add {
+  flex: 1;
+}
+
+/* Contador de quantidade (− 1 +), reaproveitado no carrinho */
+.qty {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--roxo-900);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.qty button {
+  width: 42px;
+  height: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.qty button:hover {
+  background: var(--laranja-100);
+}
+
+.qty span {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Caixa de vantagens (frete / troca) */
+.pdp__perks {
+  list-style: none;
+  padding: var(--space-4);
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  background: var(--laranja-100);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+}
+
+.pdp__perks li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pdp__perks svg {
+  color: var(--roxo-600);
+}
+
+@media (max-width: 820px) {
+  .pdp {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .pdp__gallery {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdp__buy {
+    flex-direction: column;
+  }
+  .qty {
+    align-self: flex-start;
+  }
+}

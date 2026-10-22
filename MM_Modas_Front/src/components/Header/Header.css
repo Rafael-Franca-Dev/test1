@@ -1,0 +1,214 @@
+/* =========================================================
+   Header — faixa de aviso, cabeçalho fixo e menu mobile
+   ========================================================= */
+
+/* ---------- Faixa de aviso (topo) ---------- */
+.announcement {
+  background: var(--roxo-900);
+  color: var(--laranja-100);
+  text-align: center;
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.announcement p {
+  margin: 0;
+}
+
+.announcement strong {
+  color: var(--laranja-300);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+/* "sticky" mantém o header preso no topo ao rolar */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 248, 241, 0.92);
+  backdrop-filter: blur(10px); /* desfoca o que passa por trás */
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Classe adicionada pelo React quando a página é rolada */
+.header--scrolled {
+  border-bottom-color: var(--line);
+  box-shadow: 0 6px 20px -16px rgba(44, 31, 74, 0.4);
+}
+
+/* Logo | menu | ações, alinhados em linha */
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  height: var(--header-h);
+}
+
+.header__logo {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* ---------- Menu ---------- */
+.header__nav {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.header__link {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+
+.header__link:hover {
+  background: var(--roxo-100);
+}
+
+/* Página atual (NavLink ativo) */
+.header__link--active {
+  background: var(--roxo-200);
+  font-weight: 700;
+}
+
+/* ---------- Ações (conta, carrinho, hambúrguer) ---------- */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Botão "Cadastrar" / "Olá, Nome" em formato de pílula */
+.header__account {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 18px 0 14px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--roxo-900);
+  background: var(--roxo-100);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.header__account:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-pop);
+}
+
+.header__account--active {
+  background: var(--roxo-200);
+}
+
+/* Selo "equipe" para funcionários */
+.header__staff {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--laranja-300);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Botões redondos: carrinho e hambúrguer */
+.header__cart,
+.header__toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--roxo-900);
+  background: var(--laranja-200);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.header__cart:hover {
+  transform: rotate(-8deg);
+}
+
+/* Bolinha com a quantidade de itens no carrinho */
+.header__badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--roxo-600);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid var(--bg);
+}
+
+/* Hambúrguer escondido no desktop */
+.header__toggle {
+  display: none;
+  background: var(--roxo-100);
+}
+
+/* ---------- Tablet / celular ---------- */
+@media (max-width: 960px) {
+  .header__toggle {
+    display: grid;
+  }
+
+  /* Menu vira um painel que desce abaixo do header */
+  .header__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: var(--space-4);
+    background: var(--bg);
+    border-bottom: 2px solid var(--roxo-900);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none; /* fechado = não recebe cliques */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .header__nav--open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header__link {
+    padding: 14px 16px;
+    font-size: 18px;
+  }
+}
+
+/* No celular, o botão de conta mostra só o ícone */
+@media (max-width: 560px) {
+  .header__account {
+    width: 46px;
+    padding: 0;
+    justify-content: center;
+    background: var(--roxo-100);
+  }
+  .header__account-label,
+  .header__staff {
+    display: none;
+  }
+}
