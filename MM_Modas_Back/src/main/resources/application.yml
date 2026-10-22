@@ -1,0 +1,79 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: mm-modas-api
+
+  # Credenciais vem de variavel de ambiente. Para o Neon, o formato da URL e:
+  #   jdbc:postgresql://ep-xxxxx.us-east-2.aws.neon.tech/neondb?sslmode=require
+  # No Windows, defina com:
+  #   setx DB_URL "jdbc:postgresql://.../neondb?sslmode=require"
+  #   setx DB_USER "neondb_owner"
+  #   setx DB_PASSWORD "sua_senha"
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/mm_modas}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 5          # Neon free tier tem conexoes limitadas
+      minimum-idle: 1
+      connection-timeout: 30000
+
+  jpa:
+    # validate: o Hibernate CONFERE o schema contra as entidades e falha se
+    # divergir. Nunca use update/create em projeto com Flyway - os dois
+    # brigariam pelo controle do schema.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false             # evita query disparando na serializacao
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          batch_size: 30
+        order_inserts: true
+        order_updates: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+# ---------------------------------------------------------------------------
+# Configuracao propria da aplicacao
+# ---------------------------------------------------------------------------
+app:
+  jwt:
+    # Em producao, gere com: openssl rand -base64 64
+    # Minimo 32 bytes (HS256). Se ficar curto, o jjwt recusa na inicializacao.
+    secret: ${JWT_SECRET:troque-este-segredo-por-um-valor-aleatorio-de-64-bytes-no-minimo-1234567890}
+    access-token-minutos: 30
+    refresh-token-dias: 7
+
+  cors:
+    # Origens do front-end que podem chamar a API. Ajuste para o dominio real
+    # em producao; em dev cobre Vite (5173) e CRA (3000).
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173}
+
+  mercadopago:
+    access-token: ${MP_ACCESS_TOKEN:}
+    webhook-secret: ${MP_WEBHOOK_SECRET:}
+    # URL publica para onde o Mercado Pago manda a notificacao de pagamento.
+    # Em dev, exponha com: npx ngrok http 8080
+    notification-url: ${MP_NOTIFICATION_URL:}
+
+logging:
+  level:
+    br.com.mmmodas: DEBUG
+    org.hibernate.SQL: DEBUG
